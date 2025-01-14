@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm> // For sort()
+#include "BST.h"
 
 // Define the Student struct
 struct Student {
@@ -142,3 +143,4 @@ int binarySearch(const std::vector<Student>& students, const std::string& name) 
 
     return -1; // Not found
 }
+
