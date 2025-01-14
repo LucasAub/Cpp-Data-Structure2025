@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/vivienbistrel/Desktop/Cpp-Data-Structure2025/src",
+      "program": "/Users/vivienbistrel/Desktop/Cpp-Data-Structure2025/src/build/Debug/outDebug"
+    }
+  ]
+}
