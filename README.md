@@ -1,56 +1,115 @@
 # Student Management System
 
-This is a simple C++ console application that manages a collection of students. It allows you to:
-
-- **Add a student**: Enter a student's details (name, year of enrollment, and GPA) to add them to the system.
-- **Retrieve students**: Display all students currently stored.
-- **Update a student**: Modify the details of a specific student by their name.
-- **Remove a student**: Delete a student's record by their name.
-- **Sort students**: Sort the list of students based on their year of enrollment.
-- **Binary search**: Quickly find a student by their name for update or removal.
+This is a C++ project that implements a **Student Management System**. It allows users to manage student records using a combination of a Binary Search Tree (BST) for efficient retrieval and a `std::vector` to store full student data.
 
 ## Features
-1. **Data Structure**: Uses a `std::vector` to store and manage student data.
-2. **Binary Search**: Implements binary search for efficient lookups.
-3. **Merge Sort**: Implements merge sort to sort students by year of enrollment.
-4. **Console Menu**: User-friendly menu for easy interaction.
+- Add new students.
+- Display all students.
+- Remove a student by year of enrollment.
+- Retrieve and display details of a student by year of enrollment.
 
-## Requirements
-- **Compiler**: A C++ compiler that supports C++11 or later (e.g., GCC, Clang, MSVC).
-- **Operating System**: Windows, macOS, or Linux.
+## Files and Structure
+The project is split into the following files for better readability and modularity:
 
-## How to Build and Run
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/LucasAub/Cpp-Data-Structure2025.git
-   cd src
-    ```
-2. Compile the code:
-    ```bash
-    g++ -o student_management main.cpp
-    ```
-3. Run the executable:
-    ```bash
-    ./student_management
-    ```
+### Source Files
+1. **`main.cpp`**:
+   - Manages the main menu and program flow.
+   - Calls the necessary functions to interact with the BST and the student records.
 
-## Example Usage
+2. **`Student.h`**:
+   - Defines the `Student` structure containing:
+     - `name`: The name of the student.
+     - `year_of_enrollment`: The year the student enrolled.
+     - `GPA`: The student's Grade Point Average.
 
-Upon running the program, you’ll see a menu like this:
+3. **`BST.h` & `BST.cpp`**:
+   - Implements a Binary Search Tree for managing the `year_of_enrollment`.
+   - Allows insertion, retrieval, and removal of nodes based on the year of enrollment.
+
+4. **`StudentFunctions.h` & `StudentFunctions.cpp`**:
+   - Implements functions to:
+     - Add a new student.
+     - Display all students.
+     - Remove a student by year.
+     - Retrieve details of a specific student by year.
+
+## Compilation Instructions
+To compile and run the program, ensure all files are in the same directory and execute the following command in your terminal:
+
 ```bash
+clang++ -std=c++17 -o StudentManagement main.cpp BST.cpp StudentFunctions.cpp
+```
+
+Alternatively, if you are using GCC:
+
+```bash
+g++ -std=c++17 -o StudentManagement main.cpp BST.cpp StudentFunctions.cpp
+```
+
+## How to Run
+1. After compiling, run the program with the following command:
+   ```bash
+   ./StudentManagement
+   ```
+
+2. Follow the on-screen menu to:
+   - Add students.
+   - Display the list of students.
+   - Remove a student.
+   - Retrieve a specific student's details by year of enrollment.
+
+## Example Interaction
+### Menu:
+```
+--- Student Management System ---
 1. Add Student
-2. Display All Students
-3. Update Student
-4. Remove Student
-5. Sort Students by Year of Enrollment
-6. Exit
+2. Display Students
+3. Remove Student
+4. Retrieve Student
+5. Exit
 Enter your choice:
 ```
-You can navigate through the menu to perform actions on the student data.
 
-## Limitations
+### Sample Input and Output:
+#### Adding Students:
+```
+Enter name: John Doe
+Enter year of enrollment: 2020
+Enter GPA: 3.5
+Student added successfully.
+```
 
-- Binary search assumes the list is sorted by name. Sorting is not automatic after every operation.
-- No input validation for some fields (e.g., invalid GPA or year may cause unexpected behavior).
+#### Displaying Students:
+```
+Name: John Doe, Year: 2020, GPA: 3.5
+```
 
+#### Removing Students:
+```
+Enter the year of the student to remove: 2020
+Student removed successfully.
+```
+
+#### Retrieving a Student:
+```
+Enter the year of enrollment to retrieve: 2020
+Name: John Doe, Year: 2020, GPA: 3.5
+```
+
+## Requirements
+- C++17 or later.
+- A C++ compiler like GCC or Clang.
+
+## Notes
+- The Binary Search Tree is used to manage the `year_of_enrollment` for efficient retrieval and updates.
+- The `std::vector` stores the full student details, ensuring all data is preserved and accessible.
+
+## Future Improvements
+- Add error handling for invalid inputs.
+- Support for updating student details.
+- Enhance the display function to allow sorting by different fields.
+
+---
+
+Developed for educational purposes to demonstrate the integration of data structures in C++.
 
