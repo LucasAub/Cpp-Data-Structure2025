@@ -1,44 +1,81 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
 #include "BST.h"
+#include <iostream>
 
-void insert(int data){
-    Node* newNode = new Node();
-    newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
+BST::BST() : root(nullptr) {}
 
-    if(ROOT == NULL){
-        ROOT = newNode;
-    }else{
-        Node* temp = ROOT;
-        while(true){
-            if(data < temp->data){
-                if(temp->left == NULL){
-                    temp->left = newNode;
-                    break;
-                }else{
-                    temp = temp->left;
-                }
-            }else{
-                if(temp->right == NULL){
-                    temp->right = newNode;
-                    break;
-                }else{
-                    temp = temp->right;
-                }
-            }
+TreeNode* BST::insert(TreeNode* node, int year, int index) {
+    if (!node) return new TreeNode(year, index);
+    if (year < node->year_of_enrollment) {
+        node->left = insert(node->left, year, index);
+    } else if (year > node->year_of_enrollment) {
+        node->right = insert(node->right, year, index);
+    }
+    return node;
+}
+
+void BST::insert(int year, int index) {
+    root = insert(root, year, index);
+}
+
+TreeNode* BST::search(TreeNode* node, int year) {
+    if (!node || node->year_of_enrollment == year) return node;
+    if (year < node->year_of_enrollment) return search(node->left, year);
+    return search(node->right, year);
+}
+
+TreeNode* BST::search(int year) {
+    return search(root, year);
+}
+
+TreeNode* BST::remove(TreeNode* node, int year) {
+    if (!node) return nullptr;
+
+    if (year < node->year_of_enrollment) {
+        node->left = remove(node->left, year);
+    } else if (year > node->year_of_enrollment) {
+        node->right = remove(node->right, year);
+    } else {
+        if (!node->left) {
+            TreeNode* temp = node->right;
+            delete node;
+            return temp;
+        } else if (!node->right) {
+            TreeNode* temp = node->left;
+            delete node;
+            return temp;
+        } else {
+            TreeNode* temp = node->right;
+            while (temp->left) temp = temp->left;
+            node->year_of_enrollment = temp->year_of_enrollment;
+            node->index = temp->index;
+            node->right = remove(node->right, temp->year_of_enrollment);
         }
     }
+    return node;
 }
 
-void inorder(Node* root){
-    if(root == NULL){
+void BST::remove(int year) {
+    root = remove(root, year);
+}
+
+void BST::inOrder(TreeNode* node, const std::vector<Student>& students) {
+    if (!node) return;
+    inOrder(node->left, students);
+    const Student& student = students[node->index];
+    std::cout << "Name: " << student.name << ", Year: " << student.year_of_enrollment << ", GPA: " << student.GPA << "\n";
+    inOrder(node->right, students);
+}
+
+void BST::display(const std::vector<Student>& students) {
+    if (!root) {
+        std::cout << "No students to display.\n";
         return;
     }
-    inorder(root->left);
-    std::cout << root->data << " \n";
-    inorder(root->right);
+    inOrder(root, students);
 }
 
+const Student* BST::retrieve(const std::vector<Student>& students, int year) {
+    TreeNode* node = search(year);
+    if (!node) return nullptr;
+    return &students[node->index];
+}
