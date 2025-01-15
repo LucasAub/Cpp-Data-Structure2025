@@ -1,7 +1,8 @@
 #include "StudentFunctions.h"
 #include <iostream>
 
-void addStudent(std::vector<Student>& students, BST& bst) {
+void addStudent(std::vector<Student> &students, BST &bst)
+{
     std::string name;
     int year;
     float gpa;
@@ -19,17 +20,20 @@ void addStudent(std::vector<Student>& students, BST& bst) {
     std::cout << "Student added successfully.\n";
 }
 
-void displayStudents(const std::vector<Student>& students, BST& bst) {
+void displayStudents(const std::vector<Student> &students, BST &bst)
+{
     bst.display(students);
 }
 
-void removeStudent(std::vector<Student>& students, BST& bst) {
+void removeStudent(std::vector<Student> &students, BST &bst)
+{
     int year;
     std::cout << "Enter the year of the student to remove: ";
     std::cin >> year;
 
-    TreeNode* node = bst.search(year);
-    if (!node) {
+    TreeNode *node = bst.search(year);
+    if (!node)
+    {
         std::cout << "Student not found.\n";
         return;
     }
@@ -43,13 +47,15 @@ void removeStudent(std::vector<Student>& students, BST& bst) {
     std::cout << "Student removed successfully.\n";
 }
 
-void retrieveStudent(const std::vector<Student>& students, BST& bst) {
+void retrieveStudent(const std::vector<Student> &students, BST &bst)
+{
     int year;
     std::cout << "Enter the year of enrollment to retrieve: ";
     std::cin >> year;
 
-    const Student* student = bst.retrieve(students, year);
-    if (!student) {
+    const Student *student = bst.retrieve(students, year);
+    if (!student)
+    {
         std::cout << "Student not found.\n";
         return;
     }

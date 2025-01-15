@@ -3,7 +3,8 @@
 
 #include <string>
 
-struct Student {
+struct Student
+{
     std::string name;
     int year_of_enrollment;
     float GPA;
